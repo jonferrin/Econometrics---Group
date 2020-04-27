@@ -42,6 +42,8 @@ Each of the graphics below were created to look for correlation between factors 
 pander(summary(my_data))
 ```
 
+Making changes here......
+
 ## Including Plots
 
 You can also embed plots, for example:
