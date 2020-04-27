@@ -1,0 +1,53 @@
+---
+title: "Econometrics Group Assignment 1"
+author: "Jon Ferrin"
+date: "4/27/2020"
+output:
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+```
+<style>
+body {
+text-align: justify}
+</style>
+
+  
+```{r, include=FALSE}
+library(mosaic)
+library(pander)
+library(readr)
+library(plotly)
+library(tidyverse)
+library(car)
+library(knitr)
+```
+
+
+```{r, error=FALSE, include=FALSE}
+my_data <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
+
+
+```
+
+## Background
+
+This data analyzes the various factors that coudld go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
+
+Each of the graphics below were created to look for correlation between factors and median housing prices. 
+
+```{r cars}
+pander(summary(my_data))
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
