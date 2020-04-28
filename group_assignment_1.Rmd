@@ -3,10 +3,10 @@ title: "Econometrics Group Assignment 1"
 author: "Jon Ferrin"
 date: "4/27/2020"
 output:
+  word_document: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
-  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -27,10 +27,12 @@ library(ggsci)
 ```
 
 
+
+
 ```{r, error=FALSE, include=FALSE}
 my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 
-my_data <- filter(my_data, my_data$median_price, my_data$crime_per_capita, my_data$rooms, my_data$distance)
+my_data <- filter(my_data2, my_data2$median_price, my_data2$crime_per_capita, my_data2$rooms, my_data2$distance)
 
 ```
 
@@ -50,17 +52,30 @@ pander(summary(my_data))
 Each of the graphics below were created to look for correlation between factors and median housing prices. 
 
 
-
-```{r, error=FALSE}
-pander(sd(my_data$median_price))
+```{r, error=FALSE, include=FALSE}
+'pander(sd(my_data$median_price))
 pander(sd(my_data$crime_per_capita))                  
 pander(sd(my_data$distance))
-pander(sd(my_data$rooms))
+pander(sd(my_data$rooms))'
 
+'my_data_table1 <- matrix(c(sd(my_data$median_price), sd(my_data$crime_per_capita), sd(my_data$distance), sd(my_data$rooms)))
+
+colnames(my_data_table1) <- c("Home $", "Distance", "Room")
+rownames(my_data_table1) <- c("")
+smoke <- matrix(c(51,43,22,92,28,21,68,22,9),ncol=3,byrow=TRUE)
+> colnames(smoke) <- c("High","Low","Middle")
+> rownames(smoke) <- c("current","former","never")
+> smoke <- as.table(smoke)
+> smoke
+        High Low Middle
+current   51  43     22
+former    92  28     21
+never     68  22      9'
 
 ```
 
-```{r pressure, echo=FALSE}
+
+```{r, echo=FALSE}
 CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
   geom_point()+
   labs( x= "Crime per Capita", y= "Home Prices", title = "House Prices vs Crime Rate")+
@@ -69,7 +84,9 @@ CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, 
 print(CrimePlot)
 ```
 
-```{r pressure, echo=FALSE}
+As we can see in Graph 1....
+
+```{r, echo=FALSE}
 RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 
   geom_point()+
   scale_color_viridis()+
@@ -79,7 +96,9 @@ print(RoomPlot)
 
 ```
 
-```{r pressure, echo=FALSE}
+As we can see in Graph 2....
+
+```{r, echo=FALSE}
 DistancePlot <- ggplot(data = my_data, aes(x = distance, y = median_price, color=distance))+ 
   geom_point()+
   scale_color_viridis()+
@@ -89,6 +108,11 @@ print(DistancePlot + ggtitle("Price vs Distance to Work"))
 
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
+CrimePlot
+RoomPlot
+DistancePlot
+```
 
 
