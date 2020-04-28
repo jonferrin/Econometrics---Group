@@ -3,8 +3,10 @@ title: "Econometrics Group Assignment 1"
 author: "Jon Ferrin"
 date: "4/27/2020"
 output:
-  word_document: default
+  html_document:
+    df_print: paged
   pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -41,24 +43,45 @@ Each of the graphics below were created to look for correlation between factors 
 
 ```{r cars}
 pander(summary(my_data))
-summary(my_data)
 ```
 
 Making changes here......
 
-## Including Plots
-
-You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
 ```
 
+```{r, error=FALSE}
+pander(sd(my_data$median_price))
+pander(sd(my_data$crime_per_capita))                  
+pander(sd(my_data$distance))
+pander(sd(my_data$rooms))
+
+
+```
+
 ```{r pressure, echo=FALSE}
 CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+ 
-  geom_point()
+  geom_point()+
 print(CrimePlot + ggtitle("Price vs Crime Rate"))
 
 ```
 
+```{r pressure, echo=FALSE}
+RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 
+  geom_point()+
+print(RoomPlot + ggtitle("Price vs Number of Rooms"))
+
+```
+
+```{r pressure, echo=FALSE}
+DistancePlot <- ggplot(data = my_data, aes(x = distance, y = median_price, color=distance))+ 
+  geom_point()+
+print(DistancePlot + ggtitle("Price vs Distance to Work"))
+
+```
+
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
