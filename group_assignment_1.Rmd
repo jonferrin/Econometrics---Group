@@ -22,12 +22,15 @@ library(tidyverse)
 library(car)
 library(knitr)
 library(ggplot2)
+library(viridis)
+library(ggsci)
 ```
 
 
 ```{r, error=FALSE, include=FALSE}
-my_data <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
+my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 
+my_data <- filter(my_data, my_data$median_price, my_data$crime_per_capita, my_data$rooms, my_data$distance)
 
 ```
 
@@ -39,18 +42,14 @@ text-align: justify}
 
 This data analyzes the various factors that coudld go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
 
-Each of the graphics below were created to look for correlation between factors and median housing prices. 
 
 ```{r cars}
 pander(summary(my_data))
 ```
 
-Making changes here......
+Each of the graphics below were created to look for correlation between factors and median housing prices. 
 
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
 ```{r, error=FALSE}
 pander(sd(my_data$median_price))
@@ -62,22 +61,30 @@ pander(sd(my_data$rooms))
 ```
 
 ```{r pressure, echo=FALSE}
-CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+ 
+CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
   geom_point()+
-print(CrimePlot + ggtitle("Price vs Crime Rate"))
-
+  labs( x= "Crime per Capita", y= "Home Prices", title = "House Prices vs Crime Rate")+
+  scale_color_viridis()+
+  theme_bw()
+print(CrimePlot)
 ```
 
 ```{r pressure, echo=FALSE}
 RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 
   geom_point()+
-print(RoomPlot + ggtitle("Price vs Number of Rooms"))
+  scale_color_viridis()+
+  theme_bw()+
+  labs(x="Number of Rooms", y="House Prices (Thousands)", title = "House Prices vs Number of Rooms")
+print(RoomPlot)
 
 ```
 
 ```{r pressure, echo=FALSE}
 DistancePlot <- ggplot(data = my_data, aes(x = distance, y = median_price, color=distance))+ 
   geom_point()+
+  scale_color_viridis()+
+  theme_bw()+
+  labs(x="Miles from Work", y="House Prices (Thousands)", title = "House Prices vs Miles to Work")
 print(DistancePlot + ggtitle("Price vs Distance to Work"))
 
 ```
