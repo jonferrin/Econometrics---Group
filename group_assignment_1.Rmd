@@ -9,10 +9,6 @@ output:
 
 ```{r setup, include=FALSE}
 ```
-<style>
-body {
-text-align: justify}
-</style>
 
   
 ```{r, include=FALSE}
@@ -23,6 +19,7 @@ library(plotly)
 library(tidyverse)
 library(car)
 library(knitr)
+library(ggplot2)
 ```
 
 
@@ -33,6 +30,10 @@ my_data <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 ```
 
 ## Background
+<style>
+body {
+text-align: justify}
+</style>
 
 This data analyzes the various factors that coudld go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
 
@@ -40,6 +41,7 @@ Each of the graphics below were created to look for correlation between factors 
 
 ```{r cars}
 pander(summary(my_data))
+summary(my_data)
 ```
 
 Making changes here......
@@ -50,6 +52,13 @@ You can also embed plots, for example:
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
+```
+
+```{r pressure, echo=FALSE}
+CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+ 
+  geom_point()
+print(CrimePlot + ggtitle("Price vs Crime Rate"))
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
