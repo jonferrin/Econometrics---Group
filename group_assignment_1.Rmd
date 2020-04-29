@@ -9,30 +9,22 @@ output:
     df_print: paged
 ---
 
-```{r setup, include=FALSE}
-```
-
-  
 ```{r, include=FALSE}
 library(mosaic)
 library(pander)
 library(readr)
-library(plotly)
 library(tidyverse)
-library(car)
 library(knitr)
 library(ggplot2)
 library(viridis)
-library(ggsci)
+library(ggeasy)
 ```
-
-
 
 
 ```{r, error=FALSE, include=FALSE}
 my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 
-my_data <- filter(my_data2, my_data2$median_price, my_data2$crime_per_capita, my_data2$rooms, my_data2$distance)
+my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance))
 
 ```
 
@@ -42,77 +34,54 @@ body {
 text-align: justify}
 </style>
 
-This data analyzes the various factors that coudld go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
+This data analyzes the various factors that could go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
 
 
-```{r cars}
-pander(summary(my_data))
+```{r, include=FALSE}
+pander_data <- pander(summary(my_data))
 ```
 
 Each of the graphics below were created to look for correlation between factors and median housing prices. 
 
 
-```{r, error=FALSE, include=FALSE}
-'pander(sd(my_data$median_price))
-pander(sd(my_data$crime_per_capita))                  
-pander(sd(my_data$distance))
-pander(sd(my_data$rooms))'
 
-'my_data_table1 <- matrix(c(sd(my_data$median_price), sd(my_data$crime_per_capita), sd(my_data$distance), sd(my_data$rooms)))
-
-colnames(my_data_table1) <- c("Home $", "Distance", "Room")
-rownames(my_data_table1) <- c("")
-smoke <- matrix(c(51,43,22,92,28,21,68,22,9),ncol=3,byrow=TRUE)
-> colnames(smoke) <- c("High","Low","Middle")
-> rownames(smoke) <- c("current","former","never")
-> smoke <- as.table(smoke)
-> smoke
-        High Low Middle
-current   51  43     22
-former    92  28     21
-never     68  22      9'
-
-```
-
-
-```{r, echo=FALSE}
+```{r, echo=FALSE, include=FALSE}
 CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
   geom_point()+
-  labs( x= "Crime per Capita", y= "Home Prices", title = "House Prices vs Crime Rate")+
+  labs( x= "Crime per Capita", y= "Home Prices", title = "Severe Crime Appears Socioeconomic", subtitle = "Graph 1")+
   scale_color_viridis()+
-  theme_bw()
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
 print(CrimePlot)
+ggsave("CrimePlot.png", plot = CrimePlot)
 ```
 
 As we can see in Graph 1....
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, include=FALSE}
 RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 
   geom_point()+
   scale_color_viridis()+
   theme_bw()+
-  labs(x="Number of Rooms", y="House Prices (Thousands)", title = "House Prices vs Number of Rooms")
+  labs(x="Number of Rooms", y="House Prices (Thousands)", title = "More Rooms = More Money", subtitle = "Graph 2")+
+  theme(plot.title = element_text(hjust = 0.5))
 print(RoomPlot)
+ggsave("RoomPlot.png", plot = RoomPlot)
 
 ```
 
-As we can see in Graph 2....
+As we can see in Graph 2.... 
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, include=FALSE}
 DistancePlot <- ggplot(data = my_data, aes(x = distance, y = median_price, color=distance))+ 
   geom_point()+
   scale_color_viridis()+
   theme_bw()+
-  labs(x="Miles from Work", y="House Prices (Thousands)", title = "House Prices vs Miles to Work")
-print(DistancePlot + ggtitle("Price vs Distance to Work"))
-
+  labs(x="Miles from Work", y="House Prices (Thousands)", title = "People Don't Mind Travelling", subtitle = "Graph 3")+
+  theme(plot.title = element_text(hjust = 0.5))
+print(DistancePlot)
+ggsave("DistancePlot.png", plot = DistancePlot)
 ```
 
-```{r}
-layout(matrix(c(1,1,2,3), 2, 2, byrow = TRUE))
-CrimePlot
-RoomPlot
-DistancePlot
-```
 
 
