@@ -26,6 +26,13 @@ my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 
 my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance))
 
+Crime<-c(my_data2$crime_per_capita)
+Price<-c(my_data2$median_price)
+Rooms<-c(my_data2$rooms)
+PT<-c(c(my_data2$land_tax))
+NOX<-c(my_data2$)
+Distance<-c(Homework$Distance)
+
 ```
 
 ## Background

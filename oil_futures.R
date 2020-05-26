@@ -1,5 +1,7 @@
-' API KEY = D7CTwvHDyicCWMRDi9_6 "
 
+
+' API KEY = D7CTwvHDyicCWMRDi9_6 "
+library(ggplot)
 library(Quandl)
 Quandl.api_key(D7CTwvHDyicCWMRDi9_6)
 from.dat <- as.Date("01/01/2010", format="%d/%m/%Y")

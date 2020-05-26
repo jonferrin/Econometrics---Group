@@ -1,0 +1,98 @@
+---
+title: "Untitled"
+author: ""
+date: ""
+output: 
+  pdf_document:
+    fig_height: 3
+    fig_width: 5
+  html_document:
+    fig_height: 3
+    fig_width: 5
+  word_document:
+    fig_height: 3
+    fig_width: 5
+---
+
+```{r, setup, include=FALSE}
+require(mosaic)   # Load additional packages here 
+knitr::opts_chunk$set(
+  tidy=FALSE,     # display code as typed
+  size="small")   # slightly smaller font for code
+```
+
+Delete this sentence and enter your text here.
+
+```{r, include=FALSE}
+library(mosaic)
+library(pander)
+library(readr)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(viridis)
+library(ggeasy)
+```
+
+
+```{r, error=FALSE, include=FALSE}
+my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
+
+my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance))
+
+Crime<-c(my_data2$crime_per_capita)
+Price<-c(my_data2$median_price)
+Rooms<-c(my_data2$rooms)
+PT<-c(c(my_data2$land_tax))
+NOX<-c(my_data2$nox)
+Distance<-c(my_data2$distance)
+```
+
+```{r, error=FALSE}
+pander(summary(lm(Price~Rooms+Crime+NOX)))
+
+```
+
+## Background
+<style>
+body {
+text-align: justify}
+</style>
+
+This data analyzes the various factors that could go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
+
+
+```{r, error=FALSE, include=FALSE}
+library(readxl)
+subs <- read_csv("C:/Users/jscot/Documents/Econometrics_R/401ksubs.csv")
+
+pander(summary(subs))
+str(subs)
+
+Other<-subs$inc
+INC<-subs$inc[subs$fsize == "1"]
+AGE<-subs$age[subs$fsize == "1"]
+FSIZE<-subs$fsize[subs$fsize == "1"]
+NETTFA<-subs$nettfa[subs$fsize == "1"]
+
+reg<-lm(NETTFA~FSIZE+INC+AGE)
+```
+
+
+```{r, error=FALSE}
+pander(summary(reg))
+```
+
+
+
+```{r}
+pander(t.test(Other, mu = mean(Other), alternative = "two.sided", conf.level = 0.95))
+pander(t.test(INC, mu = mean(INC), alternative = "two.sided", conf.level = 0.95))
+pander(t.test(AGE, mu = mean(AGE), alternative = "two.sided", conf.level = 0.95))
+pander(t.test(NETTFA, mu = mean(NETTFA), alternative = "two.sided", conf.level = 0.95))
+
+
+
+
+```
+
