@@ -24,14 +24,25 @@ library(ggeasy)
 ```{r, error=FALSE, include=FALSE}
 my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
 
-my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance))
+my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance, log_nox))
+
+lognox <- my_data$log_nox
+
 
 Crime<-c(my_data2$crime_per_capita)
 Price<-c(my_data2$median_price)
 Rooms<-c(my_data2$rooms)
 PT<-c(c(my_data2$land_tax))
-NOX<-c(my_data2$)
-Distance<-c(Homework$Distance)
+#NOX<-c(my_data2$)
+#Distance<-c(Homework$Distance)
+
+
+
+housing3 <- lm(my_data2$median_price ~ my_data2$rooms + my_data2$crime_per_capita + my_data2$log_nox)
+```
+
+```{r, error=FALSE}
+pander(summary(housing3))
 
 ```
 
@@ -51,7 +62,6 @@ pander_data <- pander(summary(my_data))
 Each of the graphics below were created to look for correlation between factors and median housing prices. 
 
 
-
 ```{r, echo=FALSE, include=FALSE}
 CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
   geom_point()+
@@ -64,6 +74,7 @@ ggsave("CrimePlot.png", plot = CrimePlot)
 ```
 
 As we can see in Graph 1....
+
 
 ```{r, echo=FALSE, include=FALSE}
 RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 

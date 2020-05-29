@@ -1,0 +1,59 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+---
+title: "Econometrics Group Assignment 1"
+author: "Jon Ferrin"
+date: "4/27/2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, include=FALSE}
+library(mosaic)
+library(pander)
+library(readr)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(viridis)
+library(ggeasy)
+```
+
+
+```{r, error=FALSE, include=FALSE}
+my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
+
+my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance, log_nox))
+
+lognox <- my_data$log_nox
+
+
+Crime<-c(my_data2$crime_per_capita)
+Price<-c(my_data2$median_price)
+Rooms<-c(my_data2$rooms)
+PT<-c(c(my_data2$land_tax))
+#NOX<-c(my_data2$)
+#Distance<-c(Homework$Distance)
+
+
+
+log_Regression <- lm(median_price ~ rooms + crime_per_capita + log_nox, data = my_data)
+```
+
+```{r, error=FALSE}
+pander(summary(log_Regression))
+
+```
+
+```{r, error=FALSE}
+summary(log_Regression)
+
+```
+
+

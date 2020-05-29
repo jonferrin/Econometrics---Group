@@ -1,0 +1,226 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+
+% pandoc syntax highlighting
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+
+% longtable
+\usepackage{longtable,booktabs}
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{Untitled}
+\date{}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+tufte::tufte\_html
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{pander}\NormalTok{(}\KeywordTok{summary}\NormalTok{(log_Regression))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}ccccc@{}}
+\toprule
+\begin{minipage}[b]{0.27\columnwidth}\centering
+~\strut
+\end{minipage} & \begin{minipage}[b]{0.13\columnwidth}\centering
+Estimate\strut
+\end{minipage} & \begin{minipage}[b]{0.16\columnwidth}\centering
+Std. Error\strut
+\end{minipage} & \begin{minipage}[b]{0.12\columnwidth}\centering
+t value\strut
+\end{minipage} & \begin{minipage}[b]{0.14\columnwidth}\centering
+Pr(\textgreater\textbar t\textbar)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.27\columnwidth}\centering
+\textbf{(Intercept)}\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+-13764\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+4055\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-3.394\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+0.0007422\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\centering
+\textbf{rooms}\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+7928\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+407.9\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+19.44\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+3.789e-63\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\centering
+\textbf{crime\_per\_capita}\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+-197.6\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+35.19\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-5.616\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+3.24e-08\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.27\columnwidth}\centering
+\textbf{log\_nox}\strut
+\end{minipage} & \begin{minipage}[t]{0.13\columnwidth}\centering
+-7579\strut
+\end{minipage} & \begin{minipage}[t]{0.16\columnwidth}\centering
+1538\strut
+\end{minipage} & \begin{minipage}[t]{0.12\columnwidth}\centering
+-4.929\strut
+\end{minipage} & \begin{minipage}[t]{0.14\columnwidth}\centering
+1.125e-06\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\begin{longtable}[]{@{}cccc@{}}
+\caption{Fitting linear model: median\_price \textasciitilde{} rooms +
+crime\_per\_capita + log\_nox}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering
+Observations\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\centering
+Residual Std. Error\strut
+\end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering
+\(R^2\)\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\centering
+Adjusted \(R^2\)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\centering
+Observations\strut
+\end{minipage} & \begin{minipage}[b]{0.27\columnwidth}\centering
+Residual Std. Error\strut
+\end{minipage} & \begin{minipage}[b]{0.11\columnwidth}\centering
+\(R^2\)\strut
+\end{minipage} & \begin{minipage}[b]{0.21\columnwidth}\centering
+Adjusted \(R^2\)\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\centering
+506\strut
+\end{minipage} & \begin{minipage}[t]{0.27\columnwidth}\centering
+6102\strut
+\end{minipage} & \begin{minipage}[t]{0.11\columnwidth}\centering
+0.5636\strut
+\end{minipage} & \begin{minipage}[t]{0.21\columnwidth}\centering
+0.561\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+
+
+\end{document}
