@@ -2,6 +2,7 @@ library(ggplot2)
 library(dplyr)    # data munging
 library(scales)   # nicer axis scale labels
 library(tidyverse)
+library(dygraphs)
 
 #Read in inflation data
 inflation_file <- 'Inflation_oil.csv'
@@ -16,8 +17,10 @@ inf_data <- select(inflation_data, c(Country_Name, X2010, X2011, X2012, X2013, X
 Northern <- filter(inf_data, Country_Name %in%
                      c("Western Sahara", "Mauritania", "Algeria", "Tunisia"))
 
+dygraph(Northern)
 
-CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
+
+NorthernPlot <- ggplot(data = Northern, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
   geom_point()+
   labs( x= "Crime per Capita", y= "Home Prices", title = "Severe Crime Appears Socioeconomic", subtitle = "Graph 1")+
   scale_color_viridis()+

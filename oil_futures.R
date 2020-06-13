@@ -14,6 +14,8 @@ to.dat <- as.Date("01/01/2020", format="%d/%m/%Y")
 crude.oil.futures<-Quandl("CHRIS/CME_CL1", start_date = from.dat, end_date = to.dat, type="xts")
 oil_plot <- plot(crude.oil.futures$Last)
 print(oil_plot)
+dygraph(oil_plot, main = "New Haven Temperatures") %>% 
+  dyRangeSelector()
 
 
 
