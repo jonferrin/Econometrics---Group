@@ -3,49 +3,39 @@ library(dplyr)    # data munging
 library(scales)   # nicer axis scale labels
 library(tidyverse)
 library(dygraphs)
-library(janitor)
+library(viridis)
 
 #Read in inflation data
-inflation_file2 <- 'Inflation_oil2.csv'
-inflation_data2 <- read.csv(inflation_file2)
+inflation_file <- 'Inflation_oil.csv'
+inflation_data <- read.csv(inflation_file)
 
 
 #Divide into Geographical Areas
 
-as.Date()
-
-#Country_Name, X2010, X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019))
-
+inf_data <- select(inflation_data, c(Country_Name, X2010, X2011, X2012, X2013, X2014, X2015, X2016, X2017, X2018, X2019))
 
 #Northern
-Northern <- filter(inflation_data2, Year %in%
-                     c(2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019)) %>% 
-            select(c("Year", "Mauritania", "Algeria", "Tunisia", "Mali", "Senegal",  "Guinea", 
-                     "Liberia", "Ghana", "Togo", 
-                     "Nigeria", "Niger"))  
+Northern <- filter(inf_data, Country_Name %in%
+                     c("Western Sahara", "Mauritania", "Algeria", "Tunisia"))
 
-  
-Northern_dy <- (Northern$Mauritania)
-dygraph(Northern_dy)
+#dygraph(Northern)
 
 
-
-NorthernPlot <- ggplot(data = Northern, aes(x = Year, y = median_price, color=crime_per_capita))+
+NorthernPlot <- ggplot(data = Northern, aes(x = , y = , color=))+
   geom_point()+
   labs( x= "Crime per Capita", y= "Home Prices", title = "Severe Crime Appears Socioeconomic", subtitle = "Graph 1")+
   scale_color_viridis()+
   theme_bw()+
   theme(plot.title = element_text(hjust = 0.5))
-print(CrimePlot)
+print(NorthernPlot)
 ggsave("CrimePlot.png", plot = CrimePlot)
-
 
 
 #CentralEast
 CentralEast <- filter(inf_data, Country_Name %in%
-                        c("Mali", "Cape Verde", "Senegal", "Gambia", "Guinea", 
-                          "Sierra Leone", "Liberia", "Cote d'Ivoire", "Ghana", "Togo", "Benin", 
-                          "Nigeria", "Niger", "Burkina faso"))
+                     c("Mali", "Cape Verde", "Senegal", "Gambia", "Guinea", 
+                       "Sierra Leone", "Liberia", "Cote d'Ivoire", "Ghana", "Togo", "Benin", 
+                       "Nigeria", "Niger", "Burkina faso"))
 
 
 #Central
@@ -81,9 +71,9 @@ Shiite_Majority <- filter(inf_data, Country_Name %in%
 
 #Sunni_Majority
 Sunni_Majority <- filter(inf_data, Country_Name %in%
-                           c("Egypt", "Turkey", "Saudi Arabia", 
-                             "Yemen", "Syria", "Jordan", "United Arab Emirates", 
-                             "Israel", "Libya",  "Oman", "Palestine", "Kuwait", 
-                             "Qatar"))
+                       c("Egypt", "Turkey", "Saudi Arabia", 
+                         "Yemen", "Syria", "Jordan", "United Arab Emirates", 
+                         "Israel", "Libya",  "Oman", "Palestine", "Kuwait", 
+                         "Qatar"))
 
 

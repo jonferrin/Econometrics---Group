@@ -1,0 +1,105 @@
+---
+title: "Econometrics Group Assignment 1"
+author: "Jon Ferrin"
+date: "4/27/2020"
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r, include=FALSE}
+library(mosaic)
+library(pander)
+library(readr)
+library(tidyverse)
+library(knitr)
+library(ggplot2)
+library(viridis)
+library(ggeasy)
+```
+
+
+```{r, error=FALSE, include=FALSE}
+my_data2 <- read_csv('C:/Users/jscot/Documents/Econometrics_R/hprice2.csv')
+
+my_data <- select(my_data2, c(median_price, crime_per_capita, rooms, distance, log_nox))
+
+lognox <- my_data$log_nox
+
+
+Crime<-c(my_data2$crime_per_capita)
+Price<-c(my_data2$median_price)
+Rooms<-c(my_data2$rooms)
+PT<-c(c(my_data2$land_tax))
+#NOX<-c(my_data2$)
+#Distance<-c(Homework$Distance)
+
+
+
+housing3 <- lm(my_data2$median_price ~ my_data2$rooms + my_data2$crime_per_capita + my_data2$log_nox)
+```
+
+```{r, error=FALSE}
+pander(summary(housing3))
+
+```
+
+## Background
+<style>
+body {
+text-align: justify}
+</style>
+
+This data analyzes the various factors that could go into a home purchase. The data includes: home prices, crimes committed per capita in the neighborhood, how much nitrous oxide is present on the site, average number of bedrooms per house, estimated distance to work, accessibility to radial highways, property taxes, student teacher ratio in the school districe, and the percentage of 'low status' people in the vicinity.  
+
+
+```{r, include=FALSE}
+pander_data <- pander(summary(my_data))
+```
+
+Each of the graphics below were created to look for correlation between factors and median housing prices. 
+
+
+```{r, echo=FALSE, include=FALSE}
+CrimePlot <- ggplot(data = my_data, aes(x = crime_per_capita, y = median_price, color=crime_per_capita))+
+  geom_point()+
+  labs( x= "Crime per Capita", y= "Home Prices", title = "Severe Crime Appears Socioeconomic", subtitle = "Graph 1")+
+  scale_color_viridis()+
+  theme_bw()+
+  theme(plot.title = element_text(hjust = 0.5))
+print(CrimePlot)
+ggsave("CrimePlot.png", plot = CrimePlot)
+```
+
+As we can see in Graph 1....
+
+
+```{r, echo=FALSE, include=FALSE}
+RoomPlot <- ggplot(data = my_data, aes(x = rooms, y = median_price, color=rooms))+ 
+  geom_point()+
+  scale_color_viridis()+
+  theme_bw()+
+  labs(x="Number of Rooms", y="House Prices (Thousands)", title = "More Rooms = More Money", subtitle = "Graph 2")+
+  theme(plot.title = element_text(hjust = 0.5))
+print(RoomPlot)
+ggsave("RoomPlot.png", plot = RoomPlot)
+
+```
+
+As we can see in Graph 2.... 
+
+```{r, echo=FALSE, include=FALSE}
+DistancePlot <- ggplot(data = my_data, aes(x = distance, y = median_price, color=distance))+ 
+  geom_point()+
+  scale_color_viridis()+
+  theme_bw()+
+  labs(x="Miles from Work", y="House Prices (Thousands)", title = "People Don't Mind Travelling", subtitle = "Graph 3")+
+  theme(plot.title = element_text(hjust = 0.5))
+print(DistancePlot)
+ggsave("DistancePlot.png", plot = DistancePlot)
+```
+
+
+
